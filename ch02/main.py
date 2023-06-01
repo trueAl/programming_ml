@@ -25,14 +25,14 @@ def loss(_x, _y, w):
 
 
 def train(_x, _y, iterations, learning_rate):
-    w = 0  # just as an initial value
+    w = np.average(_y) / np.average(_x)
     for i in range(iterations):
         current_loss = loss(_x, _y, w)
-        print("Iteration %4d with weight %.3f => Loss: %.6f" % (i, w, current_loss))
+        print("Iteration %4d with weight %.4f => Loss: %.6f" % (i, w, current_loss))
 
         if loss(_x, _y, w + learning_rate) < current_loss:
             w += learning_rate
-        elif loss(_x, _y, w - learning_rate) < current_loss:  # wondering how this could be reached
+        elif loss(_x, _y, w - learning_rate) < current_loss:
             w -= learning_rate
         else:
             return w
